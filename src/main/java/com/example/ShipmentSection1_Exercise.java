@@ -3,8 +3,8 @@ import java.util.List;
 
 // ╔══════════════════════════════════════════════════════════╗
 //  SECTION 1 — แบบฝึกหัด (Exercise)
-//  ชื่อนักศึกษา : ___________________________
-//  รหัสนักศึกษา : ___________________________
+//  ชื่อนักศึกษา : นายรพีภัทร แก้วคูณ
+//  รหัสนักศึกษา : 673380056-7
 // ╚══════════════════════════════════════════════════════════╝
 //
 //  โจทย์:
@@ -26,7 +26,7 @@ import java.util.List;
 // 👉 TODO A : enum นี้มีแค่ EXPRESS
 //             เพิ่ม STANDARD ให้ครบด้วย
 enum ShipmentType {
-    EXPRESS
+    EXPRESS, STANDARD
     // เพิ่ม STANDARD ตรงนี้
 }
 
@@ -43,7 +43,7 @@ class Shipment {
     //             ที่ถูกต้องต้องเป็น  (trackingNumber, weightKg, type)
     //             แต่ตอนนี้เป็น      (trackingNumber, type, weightKg)  ← ผิด
     //             แก้ให้ถูกต้อง
-    public Shipment(String trackingNumber, ShipmentType type, double weightKg) {
+    public Shipment(String trackingNumber, double weightKg, ShipmentType type) {
         this.trackingNumber = trackingNumber;
         this.weightKg       = weightKg;
         this.type           = type;
