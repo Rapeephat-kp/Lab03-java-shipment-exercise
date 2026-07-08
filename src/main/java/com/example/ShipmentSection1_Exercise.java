@@ -1,3 +1,5 @@
+package com.example;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,8 +60,8 @@ class Shipment {
     //             EXPRESS_RATE  ต้องเป็น 100.0
     //             แก้ให้ถูกต้อง
     public double calculateCost() {
-        final double STANDARD_RATE = 100.0;   // ← ผิด
-        final double EXPRESS_RATE  =  40.0;   // ← ผิด
+        final double STANDARD_RATE = 40.0;   // ← ผิด
+        final double EXPRESS_RATE  =  100.0;   // ← ผิด
         if (type == ShipmentType.STANDARD) {
             return weightKg * STANDARD_RATE;
         } else {
@@ -71,10 +73,10 @@ class Shipment {
     //             ให้แสดงในรูปแบบนี้ (ดูตัวอย่างใน ExpectedOutput_Section1.md):
     //             [TH001]  3.00 กก. | STANDARD |    120.00 บาท
     //             แนะนำ: ใช้ String.format() และเรียก calculateCost()
-    @Override
-    public String toString() {
-        return "[" + trackingNumber + "] ???";  // ← เติมให้ครบ
-    }
+   @Override
+public String toString() {
+    return String.format("[%s] %5.2f กก. | %s | %9.2f บาท",trackingNumber, weightKg, getType() , calculateCost());
+}
 }
 
 // ──────────────────────────────────────────────────────────
@@ -90,7 +92,8 @@ class ShippingCompany {
     //             เพิ่ม  shipments = new ArrayList<>();  ใน constructor
     public ShippingCompany(String name) {
         this.name = name;
-        // เพิ่มบรรทัด initialize ตรงนี้
+        shipments = new ArrayList<>();
+       
     }
 
     public void addShipment(Shipment s) {
@@ -101,7 +104,9 @@ class ShippingCompany {
     //             ให้รวม calculateCost() ของทุก Shipment ใน list
     public double getTotalCost() {
         double total = 0;
-        // วนลูปรวม cost ของแต่ละ shipment ตรงนี้
+        for (Shipment shipment : shipments){
+            total += shipment.calculateCost();
+        }
         return total;
     }
 
@@ -116,9 +121,17 @@ class ShippingCompany {
         System.out.println("========================================");
 
         // 1) วนลูปแสดงแต่ละ shipment ตรงนี้
+        for (Shipment shipment : shipments){
+            System.out.printf("%s",shipment.toString());
+            System.out.println("");
+        }
+
 
         System.out.println("----------------------------------------");
         // 2) แสดงยอดรวมตรงนี้
+        System.out.printf("ยอดรวมทั้งหมด : %9.2f" , getTotalCost());
+        System.out.println("");
+        System.out.println("========================================");
     }
 }
 
